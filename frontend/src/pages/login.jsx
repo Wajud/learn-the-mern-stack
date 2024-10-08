@@ -1,12 +1,13 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { FaSignInAlt } from "react-icons/fa";
+
 function Login() {
   const [formData, setFormData] = useState({
     email: "",
     password: "",
   });
 
-  const { name, email, password, password2 } = formData;
+  const { email, password } = formData;
 
   const onChange = (e) => {
     setFormData((prevState) => ({
