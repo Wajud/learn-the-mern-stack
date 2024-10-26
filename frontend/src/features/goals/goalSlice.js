@@ -13,13 +13,13 @@ const initialState = {
 export const createGoal = createAsyncThunk(
   "goals/create",
   async (goalData, thunkAPI) => {
-    if (thunkAPI.getState().auth.user) {
-      // only in the case the above condition is true,
-      // then you can access the token.
-    }
     try {
-      const token = thunkAPI.getState().auth.user.token || null;
-      return await goalService.createGoal(goalData, token);
+      const token = thunkAPI.getState().auth.user?.token;
+      if (token) {
+        return await goalService.createGoal(goalData, token);
+      } else {
+        console.log("No token found");
+      }
     } catch (error) {
       const message =
         (error.response &&
@@ -37,8 +37,12 @@ export const getGoals = createAsyncThunk(
   "goals/getAll",
   async (_, thunkAPI) => {
     try {
-      const token = thunkAPI.getState().auth.user.token || null;
-      return await goalService.getGoals(token);
+      const token = thunkAPI.getState().auth.user?.token;
+      if (token) {
+        return await goalService.getGoals(token);
+      } else {
+        console.log("No token found");
+      }
     } catch (error) {
       const message =
         (error.response &&
@@ -56,8 +60,12 @@ export const deleteGoal = createAsyncThunk(
   "goals/delete",
   async (id, thunkAPI) => {
     try {
-      const token = thunkAPI.getState().auth.user.token || null;
-      return await goalService.deleteGoal(id, token);
+      const token = thunkAPI.getState().auth.user?.token || null;
+      if (token) {
+        return await goalService.deleteGoal(id, token);
+      } else {
+        console.log("No token found");
+      }
     } catch (error) {
       const message =
         (error.response &&
