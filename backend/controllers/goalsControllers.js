@@ -26,7 +26,7 @@ const createGoal = asyncHandler(async (req, res) => {
 // @route PUT /api/goals/:id
 // @access Private
 const updateGoal = asyncHandler(async (req, res) => {
-  const goal = await Goal.findById(req.params.id);
+  const goal = await Goal.findById({ _id: req.params.id });
   if (!goal) {
     res.status(400);
     throw new Error("Goal not found");
@@ -44,9 +44,13 @@ const updateGoal = asyncHandler(async (req, res) => {
     res.status(401);
     throw new Error("User not authorized");
   }
-  const updatedGoal = await Goal.findByIdAndUpdate(req.params.id, req.body, {
-    new: true,
-  });
+  const updatedGoal = await Goal.findByIdAndUpdate(
+    { _id: req.params.id },
+    req.body,
+    {
+      new: true,
+    }
+  );
   res.status(200).json(updatedGoal);
 });
 

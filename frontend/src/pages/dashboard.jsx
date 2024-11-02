@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { Routes, Route, Link, useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import GoalForm from "../components/GoalForm";
 import Spinner from "../components/Spinner";
@@ -41,7 +41,7 @@ function Dashboard() {
         {goals?.length > 0 ? (
           <div className="goals">
             {goals.map((goal) => (
-              <GoalItem key={goal._id} goal={goal} />
+              <GoalItem goal={goal} key={goal._id} />
             ))}
           </div>
         ) : (
