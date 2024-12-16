@@ -2,7 +2,6 @@ import React from "react";
 import { useDispatch } from "react-redux";
 import { deleteGoal } from "../features/goals/goalSlice";
 import { Link } from "react-router-dom";
-import { compareSync } from "bcryptjs";
 
 const GoalItem = ({ goal }) => {
   const dispatch = useDispatch();
